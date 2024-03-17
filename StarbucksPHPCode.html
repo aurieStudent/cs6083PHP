@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Database Tables</title>
+</head>
+<body>
+    <h2>Customers</h2>
+    <table border="1">
+        <tr>
+            <th>Customer ID</th>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Phone</th>
+        </tr>
+        <?php
+        $conn = new mysqli('localhost', 'username', 'password', 'database_name');
+
+        if ($conn->connect_error) {
+            die("Connection failed: " . $conn->connect_error);
+        }
+
+        $sql = "SELECT * FROM Customer";
+        $result = $conn->query($sql);
+
+        if ($result->num_rows > 0) {
+            while($row = $result->fetch_assoc()) {
+                echo "<tr><td>" . $row["customer_id"] . "</td><td>" . $row["customer_name"] . "</td><td>" . $row["customer_email"] . "</td><td>" . $row["customer_phone"] . "</td></tr>";
+            }
+        } else {
+            echo "0 results";
+        }
+
+        $conn->close();
+        ?>
+    </table>
+
+    <h2>Frappucino Products</h2>
+    <table border="1">
+        <tr>
+            <th>Product ID</th>
+            <th>Name</th>
+            <th>Price</th>
+        </tr>
+        <?php
+        $conn = new mysqli('localhost', 'username', 'password', 'database_name');
+
+        if ($conn->connect_error) {
+            die("Connection failed: " . $conn->connect_error);
+        }
+
+        $sql = "SELECT * FROM Frappucino_Product";
+        $result = $conn->query($sql);
+
+        if ($result->num_rows > 0) {
+            while($row = $result->fetch_assoc()) {
+                echo "<tr><td>" . $row["product_id"] . "</td><td>" . $row["product_name"] . "</td><td>" . $row["product_price"] . "</td></tr>";
+            }
+        } else {
+            echo "0 results";
+        }
+
+        $conn->close();
+        ?>
+    </table>
+</body>
+</html>
+
+```
